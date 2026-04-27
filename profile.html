@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">Update Profile</div>
+            <div class="card-body">
+                <form action="{{ url_for('profile') }}" method="POST" enctype="multipart/form-data">
+                    
+                    <div class="mb-4 text-center">
+                        {% if account.profile_photo %}
+                            <img src="{{ url_for('static', filename='uploads/' + account.profile_photo) }}" alt="Profile Photo" class="rounded-circle shadow-sm mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-secondary shadow-sm d-inline-flex justify-content-center align-items-center text-white mb-2" style="width: 120px; height: 120px; font-size: 3rem;">
+                                {{ account.username[0]|upper }}
+                            </div>
+                        {% endif %}
+                        <br>
+                        <label class="form-label text-muted small">Change Profile Photo</label>
+                        <input type="file" name="profile_photo" class="form-control form-control-sm w-75 mx-auto" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Full Name</label>
+                        <input type="text" name="full_name" class="form-control" value="{{ account.full_name or '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ account.email or '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Contact Number</label>
+                        <input type="text" name="contact_number" class="form-control" value="{{ account.contact_number or '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Address</label>
+                        <textarea name="address" class="form-control" rows="3">{{ account.address or '' }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Update Profile Information</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">Reset Password</div>
+            <div class="card-body">
+                <form action="{{ url_for('profile') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">New Password</label>
+                        <input type="password" name="new_password" class="form-control" placeholder="Enter new password" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Change Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3>Academic Performance</h3>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Welcome, {{ username }}</h5>
+        <p class="text-muted">Below are your grades. You cannot edit these records.</p>
+        
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in grades %}
+                    <tr>
+                        <td>{{ item.subject }}</td>
+                        <td>{{ item.marks }}</td>
+                        <td>{{ item.grade }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3">No grades available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
